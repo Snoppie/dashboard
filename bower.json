@@ -18,7 +18,6 @@
   ],
   "dependencies": {
     "fontawesome": "~4",
-    "bootstrap": "~3",
-    "google-chart": "~1"
+    "bootstrap": "~3"
   }
 }
