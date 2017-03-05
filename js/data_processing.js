@@ -81,16 +81,25 @@ function update_chart(){
 			labels = liveChart.data.labels
 			data = liveChart.data.datasets[0].data
 
-			// data.push(Math.random() * 100);
-			data.push(new_bpm);
+			
 
-			labels.push(new_time);
-			if (data.length > max_datapoints){
-				data.shift();
-				labels.shift();
+			console.log(json.data.face);
+
+			if (json.data.face){
+				data.push(new_bpm);
+				labels.push(new_time);
+				if (data.length > max_datapoints){
+					data.shift();
+					labels.shift();
+				};
+				liveChart.data.datasets[0].backgroundColor = ['rgba(194, 237, 203, 0.5)',];
+				liveChart.update();
+			} else {
+				liveChart.data.datasets[0].backgroundColor = ['rgba(10, 10, 10, 0.1)',];
+				liveChart.update();	
 			};
 
-			liveChart.update();
+			
 		});
 
 	}, refresh_rate);
