@@ -1,6 +1,6 @@
 var refresh_rate = 1000; // refresh rate in ms
 var camera_url = "http://ec2-54-93-71-88.eu-central-1.compute.amazonaws.com/"
-var max_datapoints = 30;
+var max_datapoints = 100;
 
 var liveChart
 var initData
@@ -18,6 +18,15 @@ function draw_data(){
 			bpm.push(element.data.bpm);
 			is_there.push(element.data.face);
 		});
+
+		$.each([timestamps, bpm, is_there], function(index, theArray) {
+			if (theArray.length > max_datapoints) 
+				theArray.splice(0, theArray.length - max_datapoints);
+		});
+
+		// if (timestamps.length > 10) timestamps.length = timestamps.slice(timestamps.length - max_datapoints, max_datapoints);
+		// if (timestamps.length > 10) bpm.length = bpm.slice(bpm.length - max_datapoints, max_datapoints);
+		// if (timestamps.length > 10) is_there.length = is_there.slice(is_there.length - max_datapoints, max_datapoints);
 
 		initData = {
 			labels: timestamps,
